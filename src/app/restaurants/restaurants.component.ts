@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Restaurant } from './restaurant/restaurant.module';
+import { Restaurant } from './restaurant/restaurant.model';
 import { RestaurantsService } from './restaurants.service';
 
 @Component({
