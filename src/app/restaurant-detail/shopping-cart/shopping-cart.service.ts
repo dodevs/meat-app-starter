@@ -2,7 +2,7 @@ import { CartItem } from "app/restaurant-detail/shopping-cart/cart-item.model";
 import { MenuItem } from '../menu-item/menu-item.model';
 
 export class ShoppingCartService {
-  items: CartItem[];
+  items: CartItem[] = [];
 
   clear(){
     this.items = [];
@@ -12,15 +12,15 @@ export class ShoppingCartService {
     // Retorna undefined se nao encontrar ou o item
     let foundItem = this.items.find((mItem) => mItem.menuItem.id === item.id);
     if(foundItem){
-      console.log(foundItem);
-      foundItem.quantity += 1;
+      // console.log(foundItem);
+      foundItem.quantity = foundItem.quantity + 1;
     }else{
-      this.items.push(new CartItem(item))
+      this.items.push(new CartItem(item));
     }
   }
 
   removeItem(item: CartItem){
-    this.items.splice(this.items.indexOf(item), 1)
+    this.items.splice(this.items.indexOf(item), 1);
   }
 
   total(): number {
