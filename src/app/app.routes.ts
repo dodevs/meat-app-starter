@@ -9,6 +9,8 @@ import { RestaurantDetailComponent } from './restaurant-detail/restaurant-detail
 import { ReviewsComponent } from './restaurant-detail/reviews/reviews.component';
 import { MenuComponent } from "app/restaurant-detail/menu/menu.component";
 
+import { OrderComponent } from './order/order.component';
+
 const ROUTES: Routes = [
   {
     path: '',
@@ -27,9 +29,13 @@ const ROUTES: Routes = [
     component: RestaurantDetailComponent,
     children: [
       {path: '', redirectTo: 'menu', pathMatch: 'full'},
-      {path: 'menu', component: MenuComponent},
+      {path: 'menu', component: MenuComponent,},
       {path: 'reviews', component: ReviewsComponent}
     ]
+  },
+  {
+    path: 'order',
+    component: OrderComponent
   }
 ]
 
