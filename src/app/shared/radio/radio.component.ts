@@ -8,12 +8,14 @@ import { RadioOption } from './radio-option.module';
   templateUrl: './radio.component.html',
   providers: [
     {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(()=> RadioComponent),
+      provide: NG_VALUE_ACCESSOR, // Token para registar o componente no framework
+      useExisting: forwardRef(()=> RadioComponent), // Uma referencia de que vai estar disponivel posteriormente
       multi: true
     }
   ]
 })
+// A interface ControlValueAccessor é implementada para que o o componente personalizado seja reconhecido como
+// um componente de formulario e possa interagir com os controles de entrada de dados
 export class RadioComponent implements OnInit, ControlValueAccessor {
 
   @Input() options: RadioOption[];
