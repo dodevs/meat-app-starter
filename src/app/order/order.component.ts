@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { FormGroup, FormBuilder } from '@angular/forms';
+
 import { RadioOption } from "app/shared/radio/radio-option.module";
 import { OrderService } from './order.service';
 import { CartItem } from '../restaurant-detail/shopping-cart/cart-item.model';
@@ -12,6 +14,8 @@ import { Order, OrderItem } from './order.model';
 })
 export class OrderComponent implements OnInit {
 
+  orderForm: FormGroup
+
   delivery: number = 8;
 
   paymentOptions: RadioOption[] = [
@@ -22,10 +26,20 @@ export class OrderComponent implements OnInit {
 
   constructor(
     private orderService: OrderService,
-    private router: Router
+    private router: Router,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit() {
+    this.orderForm = this.fb.group({
+      name: this.fb.control(''), // Valor do input
+      email: this.fb.control(''),
+      emailConfirmation: this.fb.control(''),
+      address: this.fb.control(''),
+      number: this.fb.control(''),
+      optionalAddress: this.fb.control(''),
+      paymentOption: this.fb.control('')
+    })
   }
 
   itemsValue(): number {
