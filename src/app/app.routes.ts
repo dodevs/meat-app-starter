@@ -35,7 +35,7 @@ const ROUTES: Routes = [
   },
   {
     path: 'order',
-    component: OrderComponent
+    loadChildren: './order/order.module#OrderModule' // Caminho do module # nome do module
   },
   {
     path: 'order-summary',
