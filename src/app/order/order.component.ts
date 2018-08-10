@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { FormGroup, FormBuilder, Validator, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 
 import { RadioOption } from "app/shared/radio/radio-option.module";
 import { OrderService } from './order.service';
 import { CartItem } from '../restaurant-detail/shopping-cart/cart-item.model';
 import { Order, OrderItem } from './order.model';
-import { validateConfig } from '../../../node_modules/@angular/router/src/config';
-import { ValueTransformer } from '../../../node_modules/@angular/compiler/src/util';
 
 @Component({
   selector: 'mt-order',
@@ -45,7 +43,20 @@ export class OrderComponent implements OnInit {
       number: this.fb.control('',[Validators.required, Validators.pattern(this.numberPattern)]),
       optionalAddress: this.fb.control(''),
       paymentOption: this.fb.control('',[Validators.required])
-    })
+    }, {validator: OrderComponent.equalsTo})
+
+  }
+
+  static equalsTo(group: AbstractControl): {[key:string]: boolean} {
+    const email = group.get('email')
+    const emailConfirmation = group.get('emailConfirmation')
+    if(!email || !emailConfirmation){
+      return undefined
+    }
+    if(email.value !== emailConfirmation.value){
+      return {emailsNotMatch:true}
+    }
+    return undefined
   }
 
   itemsValue(): number {
