@@ -2,8 +2,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { HttpModule } from '@angular/http';
-import { AppRoutingModule } from './app.routes';
+import { RouterModule} from '@angular/router';
+import { PreloadAllModules } from '@angular/router';
 /* Modulos */
+
+import { ROUTES } from './app.routes';
 
 /* Componentes */
 import { AppComponent } from './app.component';
@@ -20,7 +23,6 @@ import { OrderSummaryComponent } from './order-summary/order-summary.component';
 /* Components */
 
 import { SharedModule } from './shared/shared.module';
-import { CoreModule } from './core/core.module';
 
 
 
@@ -41,7 +43,7 @@ import { CoreModule } from './core/core.module';
   imports: [
     BrowserModule,
     HttpModule,
-    AppRoutingModule,
+    RouterModule.forRoot(ROUTES, {preloadingStrategy: PreloadAllModules}), // estratégia de carregamento, módulos pré-carregados
     SharedModule.forRoot(), // Shared module mais os providers
   ],
   providers: [
