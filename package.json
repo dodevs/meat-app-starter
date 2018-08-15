@@ -5,6 +5,8 @@
   "angular-cli": {},
   "scripts": {
     "ng": "ng",
+    "api-start": "json-server --host 0.0.0.0 db.json",
+    "public-start": "ng serve --host 0.0.0.0 --disable-host-check",
     "start": "ng serve",
     "lint": "tslint \"src/**/*.ts\" --project src/tsconfig.json --type-check && tslint \"e2e/**/*.ts\" --project e2e/tsconfig.json --type-check",
     "test": "ng test",
