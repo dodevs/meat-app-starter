@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { NotificationService } from '../notification.service';
+import { Observable } from 'rxjs';
+/* Operadores a serem usados com o Obersvable */
+import 'rxjs/add/observable/timer';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'mt-snackbar',
@@ -32,9 +38,18 @@ export class SnackbarComponent implements OnInit {
 
   snackVisibility: string = 'hidden';
 
-  constructor() { }
+  constructor(private notificationService: NotificationService) { }
 
   ngOnInit() {
+    // subscribe: coloca um listener no observable, e só a partir disso é q o observable vai nos notificar
+    // do: permite executar uma ação no instante que chega a mensagem
+    // switchMap: trocar o observable, quando é chega uma nova mensagem é feito o unsubscribe do Observable antigo
+    this.notificationService.notifier
+      .do(message => {
+        this.message = message
+        this.snackVisibility = 'visible'
+      }).switchMap(message => Observable.timer(2000))
+        .subscribe(timer => this.snackVisibility = 'hidden')
   }
 
 }
