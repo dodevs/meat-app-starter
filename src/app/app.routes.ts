@@ -8,7 +8,6 @@ import { RestaurantDetailComponent } from './restaurant-detail/restaurant-detail
 import { ReviewsComponent } from './restaurant-detail/reviews/reviews.component';
 import { MenuComponent } from "app/restaurant-detail/menu/menu.component";
 
-import { OrderComponent } from './order/order.component';
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
 
 const ROUTES: Routes = [
@@ -43,12 +42,4 @@ const ROUTES: Routes = [
   }
 ]
 
-@NgModule({
-  imports: [
-    RouterModule.forRoot(ROUTES)
-  ],
-  exports: [
-    RouterModule
-  ]
-})
-export class AppRoutingModule { }
+export {ROUTES}
