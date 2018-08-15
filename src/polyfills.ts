@@ -20,4 +20,7 @@ import 'zone.js/dist/zone';
 
 // Internacionalização 
 import 'intl';
-import 'intl/locale-data/jsonp/pt-BR.js'
+import 'intl/locale-data/jsonp/pt-BR.js';
+
+// Web Animations
+import 'web-animations-js/web-animations.min.js';
