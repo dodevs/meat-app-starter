@@ -1,0 +1,13 @@
+.snackbar {
+    min-width: 250px; /* largura minima */
+    margin-left: -125px; /* margem da esquerda */
+    background-color: #333; /* Cor de fundo */
+    color: #fff; /* Cor do texto */
+    text-align: center; /* alinhamento do texto */
+    border-radius: 2px; /* curvatura da borda */
+    padding: 16px; /* margem interna */
+    position: fixed; /* posição na página */
+    z-index: 1; /* posição tipo camada */
+    left: 50%;
+    bottom: 30px /* distancia do fim da página */
+}
