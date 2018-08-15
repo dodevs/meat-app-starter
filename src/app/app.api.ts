@@ -1,1 +1,1 @@
-export const MEAT_API = 'http://localhost:3000';
+export const MEAT_API = 'http://172.20.24.222:3000';
