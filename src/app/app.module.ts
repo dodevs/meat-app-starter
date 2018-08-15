@@ -42,8 +42,7 @@ import { CoreModule } from './core/core.module';
     BrowserModule,
     HttpModule,
     AppRoutingModule,
-    SharedModule,
-    CoreModule
+    SharedModule.forRoot(), // Shared module mais os providers
   ],
   providers: [
     {
