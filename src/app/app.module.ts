@@ -4,6 +4,7 @@ import { NgModule, LOCALE_ID } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { RouterModule} from '@angular/router';
 import { PreloadAllModules } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 /* Modulos */
 
 import { ROUTES } from './app.routes';
@@ -45,6 +46,7 @@ import { SharedModule } from './shared/shared.module';
     HttpModule,
     RouterModule.forRoot(ROUTES, {preloadingStrategy: PreloadAllModules}), // estratégia de carregamento, módulos pré-carregados
     SharedModule.forRoot(), // Shared module mais os providers
+    BrowserAnimationsModule
   ],
   providers: [
     {
