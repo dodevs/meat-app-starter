@@ -7,7 +7,7 @@ import { ShoppingCartService } from './shopping-cart.service';
   selector: 'mt-shopping-cart',
   templateUrl: './shopping-cart.component.html',
   animations: [
-    trigger('routerAnimation', [
+    trigger('row', [
       state('ready', style({opacity: 1})),
       transition('void => ready',
         animate('300ms 0s ease-in', keyframes([
