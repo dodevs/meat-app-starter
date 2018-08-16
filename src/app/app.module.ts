@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule} from '@angular/router';
 import { PreloadAllModules } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 /* Modulos */
 
 import { ROUTES } from './app.routes';
@@ -51,6 +52,10 @@ import { NotFoundComponent } from './not-found/not-found.component';
     BrowserAnimationsModule
   ],
   providers: [
+    { // Adotando estratégia de Hash do AngularJS - host/#/path
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy
+    },
     {
       provide: LOCALE_ID,
       useValue: 'pt-BR'
