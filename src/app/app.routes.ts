@@ -9,20 +9,14 @@ import { ReviewsComponent } from './restaurant-detail/reviews/reviews.component'
 import { MenuComponent } from "app/restaurant-detail/menu/menu.component";
 
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
+
+/* Rotas especificas ficam no topo e as mais genericas no final */
 const ROUTES: Routes = [
-  {
-    path: '',
-    component: HomeComponent
-  },
-  {
-    path: 'about',
-    loadChildren: './about/about.module#AboutModule'
-  },
-  {
-    path: 'restaurants',
-    component: RestaurantsComponent
-  },
+  {path: '', component: HomeComponent},
+  {path: 'about',loadChildren: './about/about.module#AboutModule'},
+  {path: 'restaurants',component: RestaurantsComponent},
   {
     path: 'restaurants/:id',
     component: RestaurantDetailComponent,
@@ -36,10 +30,8 @@ const ROUTES: Routes = [
     path: 'order',
     loadChildren: './order/order.module#OrderModule' // Caminho do module # nome do module
   },
-  {
-    path: 'order-summary',
-    component: OrderSummaryComponent
-  }
+  {path: 'order-summary',component: OrderSummaryComponent},
+  {path: '**', component: NotFoundComponent} // ** significa wildcard, é o curinga. Deve ficar no final
 ]
 
 export {ROUTES}
