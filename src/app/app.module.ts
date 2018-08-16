@@ -52,10 +52,11 @@ import { NotFoundComponent } from './not-found/not-found.component';
     BrowserAnimationsModule
   ],
   providers: [
-    { // Adotando estratégia de Hash do AngularJS - host/#/path
-      provide: LocationStrategy,
+    /*
+    { 
+      provide: LocationStrategy, // Adotando estratégia de Hash do AngularJS - host/#/path
       useClass: HashLocationStrategy
-    },
+    }, */
     {
       provide: LOCALE_ID,
       useValue: 'pt-BR'
