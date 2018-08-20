@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, animate, transition, style } from '@angular/animations';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms'; //Form dependences
+
+import { Observable } from 'rxjs/Observable'
 import 'rxjs/operator/switchMap';
 import 'rxjs/operator/do';
-import 'rxjs/operator/debounceTime'
-import 'rxjs/operator/distinctUntilChanged';
+import 'rxjs/operator/debounceTime' // Adiciona um tempo entre as requisições
+import 'rxjs/operator/distinctUntilChanged'; // Processa somente valores distintos
+import 'rxjs/add/operator/catch' // Trata erros
+import 'rxjs/add/observable/from'
 
 import { Restaurant } from './restaurant/restaurant.model';
 import { RestaurantsService } from './restaurants.service';
@@ -53,8 +57,13 @@ export class RestaurantsComponent implements OnInit {
       .debounceTime(500)
       .distinctUntilChanged()
       // .do(searchTerm => console.log(`q=${searchTerm}`)) // O que fazer antes de tudo
-      .switchMap( searchTerm => this.restaurantsService.restaurants(searchTerm)) // Faz unsubscribe da anterior
-      .subscribe( restaurants => this.restaurants = restaurants) // Aqui o conteudo que chega já está filtrado
+      .switchMap( searchTerm =>
+        this.restaurantsService
+          .restaurants(searchTerm)
+          .catch(error => Observable.from([]))) // Se der error retorna um Stream vazio
+      .subscribe( restaurants => 
+        this.restaurants = restaurants) // Aqui o conteudo que chega já está filtrado
+
 
     this.restaurantsService.restaurants()
       .subscribe( restaurants => this.restaurants = restaurants)
