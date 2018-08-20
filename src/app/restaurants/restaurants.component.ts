@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { trigger, state, animate, transition, style } from '@angular/animations';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms'; //Form dependences
 import 'rxjs/operator/switchMap';
+import 'rxjs/operator/do';
+import 'rxjs/operator/debounceTime'
+import 'rxjs/operator/distinctUntilChanged';
 
 import { Restaurant } from './restaurant/restaurant.model';
 import { RestaurantsService } from './restaurants.service';
@@ -47,7 +50,10 @@ export class RestaurantsComponent implements OnInit {
 
     // valueChanges retorna o termo buscado que vem de um observable
     this.searchControl.valueChanges
-      .switchMap( searchTerm => this.restaurantsService.restaurants(searchTerm))
+      .debounceTime(500)
+      .distinctUntilChanged()
+      // .do(searchTerm => console.log(`q=${searchTerm}`)) // O que fazer antes de tudo
+      .switchMap( searchTerm => this.restaurantsService.restaurants(searchTerm)) // Faz unsubscribe da anterior
       .subscribe( restaurants => this.restaurants = restaurants) // Aqui o conteudo que chega já está filtrado
 
     this.restaurantsService.restaurants()
