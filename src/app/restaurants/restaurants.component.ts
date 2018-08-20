@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { trigger, state, animate, transition, style } from '@angular/animations';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms'; //Form dependences
+import 'rxjs/operator/switchMap';
 
 import { Restaurant } from './restaurant/restaurant.model';
 import { RestaurantsService } from './restaurants.service';
-import { trigger, state, animate, transition, style } from '@angular/animations';
 
 @Component({
   selector: 'mt-restaurants',
@@ -28,9 +30,26 @@ export class RestaurantsComponent implements OnInit {
 
   restaurants: Restaurant[];
 
-  constructor(private restaurantsService: RestaurantsService) { }
+  searchForm: FormGroup;
+  searchControl: FormControl
+
+  constructor(
+    private restaurantsService: RestaurantsService,
+    private formBuilder: FormBuilder
+  ) { }
 
   ngOnInit() {
+
+    this.searchControl = this.formBuilder.control('');
+    this.searchForm = this.formBuilder.group({
+      searchControl: this.searchControl
+    })
+
+    // valueChanges retorna o termo buscado que vem de um observable
+    this.searchControl.valueChanges
+      .switchMap( searchTerm => this.restaurantsService.restaurants(searchTerm))
+      .subscribe( restaurants => this.restaurants = restaurants) // Aqui o conteudo que chega já está filtrado
+
     this.restaurantsService.restaurants()
       .subscribe( restaurants => this.restaurants = restaurants)
   }
