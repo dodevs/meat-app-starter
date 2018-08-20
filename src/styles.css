@@ -271,5 +271,9 @@ body {
 .search-link:hover {
   color: #dd4b39;
 }
-/* Barra de buscas de restaurantes */
 
+.search-bar{
+  opacity: 0;
+  max-height: 0px
+}
+/* Barra de buscas de restaurantes */
