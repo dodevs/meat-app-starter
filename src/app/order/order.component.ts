@@ -85,8 +85,8 @@ export class OrderComponent implements OnInit {
     this.orderService.checkOrder(order).subscribe((orderId: string) => {
       this.router.navigate(['/order-summary'])
       this.orderService.clear()
+      console.log(order)
     })
-    console.log(order)
   }
 
 }
