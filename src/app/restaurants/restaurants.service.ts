@@ -20,9 +20,9 @@ export class RestaurantsService {
    * @param search - opcional param for search
    */
   restaurants(search?:string): Observable<Restaurant[]> {
-    return this.http.get(`${MEAT_API}/restaurants`, {params: {q: search}}) //Parametro q (query) - busca em todos os dados do restaurante
-      .map(response => response.json())
-      .catch(ErrorHandler.handleError)
+    let params: HttpParams = undefined;
+    if(search) params = new HttpParams().set("q",search)
+    return this.http.get<Restaurant[]>(`${MEAT_API}/restaurants`, {params: params}) //Parametro q (query) - busca em todos os dados do restaurante
   }
 
   restaurantById(id: string): Observable<Restaurant> {
